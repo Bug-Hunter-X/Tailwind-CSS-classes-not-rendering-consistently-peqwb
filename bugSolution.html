@@ -1,0 +1,34 @@
+The issue was resolved by ensuring the Tailwind CSS directives were correctly included in the project's main CSS file,  and that the `tailwind.config.js` file correctly pointed to the necessary files.  The `purge` option in `tailwind.config.js` needed to be updated to include the correct paths to the template files containing Tailwind CSS classes.
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  purge: ['./src/**/*.html', './src/**/*.js'],
+  darkMode: false,
+  theme: {
+    extend: {},
+  },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Adding missing components to the `purge` array solved the styling problems.  The corrected HTML is shown below:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tailwind CSS Bug</title>
+<link href="../dist/output.css" rel="stylesheet">
+</head>
+<body>
+<div class="bg-gray-200 p-4 rounded-lg shadow-md">
+  <p>This text should have a gray background, padding, rounded corners, and a shadow.</p>
+</div>
+</body>
+</html>
+```
